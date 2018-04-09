@@ -31,11 +31,7 @@
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     </head>
     <body>
-        
                 <h1> Video Game Market <img src="img/videog.png"  width="50" height="50"/> </h1>
-        
-        
-     
         <br>
          <img src="img/robot.png" id="robot"  width="150" height="250"/>
        <img src="img/control.png"  id="controller" width="150" height="250"/>
