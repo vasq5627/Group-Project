@@ -24,7 +24,7 @@
     <head>
         <title> Home  </title>
          <style>
-              @import url(css/styl.css);
+              @import url(css/style.css);
         </style>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
@@ -51,11 +51,11 @@
             <h3 >Game Category: </h3> 
             <select name="category" >
                 <option value="">Select One</option>
-                <option value="action">Action</option></option>
-                <option value="shooter">Shooter</option></option>
+                <option value="action">Action-adventure</option></option>
+                <option value="shooter">First-person Shooter</option></option>
                 <option value="fantasy">Fantasy</option></option>
                 <option value="sports">Sports</option></option>
-                <option value="role">Role-Play</option></option>
+                <option value="Puzzle">Puzzle</option></option>
             </select>
             <br>
             <br>
