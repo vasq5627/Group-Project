@@ -1,8 +1,12 @@
 <?php
     //creating session
     session_start();
+    include 'functions.php';
     
-    
+    if(isset($_POST['gameID'])){
+        array_push($_SESSION['cart'],$_POST['gameID']);
+    }
+  
 ?>
 
 <!DOCTYPE html>
@@ -15,11 +19,15 @@
         </style>
     </head>
     <body>
+        <form>
         <h1> Shopping Cart </h1>
         <form>
             
         </form>
-
+        <button formaction='index.php'>Home</button>
+        
+        <?=displayShoppingCart()?>
+        
     </body>
     <footer id="footer">
             <hr>

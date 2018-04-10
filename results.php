@@ -10,6 +10,10 @@
         }
     }
     
+    if(isset($_POST['gameID'])){
+        array_push($_SESSION['cart'],$_POST['gameID']);
+    }
+    
     
     
 ?>
@@ -29,7 +33,7 @@
             <br>
             
             <form>
-            
+            <?=displaySearchResults()?>
             </form>
     </body>
     <footer id="footer">

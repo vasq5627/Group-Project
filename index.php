@@ -1,17 +1,20 @@
+
 <?php
 //creating session
+
     session_start();
     $_SESSION['searches']= array();
-   /* if(!isset($_SESSION['cart'])){
+    if(!isset($_SESSION['cart'])){
+
         $_SESSION['cart'] = array();
 
-    }*/
+    }
 
     //check to see if user has searched for something
 
     if(isset($_GET['game'])){
         $_SESSION['searches'] = $_GET['game'];
-        print($_SESSION['searches']);
+        //print($_SESSION['searches']);
     }
 ?>
 
