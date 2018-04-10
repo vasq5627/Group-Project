@@ -4,17 +4,21 @@
     text-align:center;
   background-image:url(../img/google.png);
 }
-
-h1 {
-   width: 300px;
+#cart {
+    float:right;
+}
+h4{
+    font-family: "Comic Sans MS", cursive, sans-serif;
+}
+#title {
+    width: 300px;
     background-color:DodgerBlue;
     opacity: .8;
     color: #000000;
     text-align: center;
     height:50;
-    border-radius: 10px;
+    border-radius: 15px;
     margin: auto;
-    padding-right: 80px;
     top: 60px;
     font-family: "Comic Sans MS", cursive, sans-serif;
 }
@@ -26,7 +30,7 @@ input[type=text] {
     width: 150px;
     box-sizing: border-box;
     border: 2px solid #ccc;
-    border-radius: 4px;
+    border-radius: 20px;
     font-size: 18px;
     background-color: white;
     background-position: 10px 10px; 
@@ -56,10 +60,6 @@ input[type=text]:focus {
     
 }
 
-.badge-badge-light{
-    float:right;
-}
-
 
  form {
     width: 600px;
@@ -75,6 +75,7 @@ input[type=text]:focus {
      border-style: solid;
     border-color:  #3366ff;
 }
+
 #game{
     float :left;
 }
