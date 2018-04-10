@@ -65,10 +65,10 @@
           <h3 >Game Platform: </h3>
           <div class="btn-group btn-group-toggle" data-toggle="buttons">
               <label class="btn btn-success">
-                <input type="radio" name="options" id="optionOne" autocomplete="off"> Xbox One 
+                <input type="radio" name="options" id="optionOne" autocomplete="off"> Xbox
                   </label>
               <label class="btn btn-primary">
-                <input type="radio" name="options" id="optionTwo" autocomplete="off"> PS4
+                <input type="radio" name="options" id="optionTwo" autocomplete="off"> Playstation 
           </label>
             </div>
             <br>
