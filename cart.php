@@ -1,10 +1,19 @@
 <?php
     
     session_start();
-    if(!isset($_SESSION['cart'])){
-        $_SESSION['cart'] = array();
+    
+    function displayCart(){
+        if(isset($_SESSION['cart'])){
+            echo "<table>";
+            foreach($_SESSION['cart'] as $game){
+                echo '<tr>';
+                echo "<td><h4>$game</h4></td>";
+                echo "</tr>";
+            }
+            echo "</table>";
+        }
     }
-
+    
 
 
 ?>
@@ -18,10 +27,11 @@
         </style>
     </head>
     <body>
+        <a href='index.php'>Home</a>
 
-            <h1> Your Shopping Cart</h1>
-            <br>
-    </body>
+            <h1> Your Shopping Cart</h1><br>
+            <!--Cart Items-->
+            <?=displayCart()?>
     <footer>
         <hr>
         CST336 Internet Programming. 2018 &copy <br />
@@ -32,4 +42,6 @@
             <img src="img/Monterey.jpg" alt="School Logo" height="100" width="150" />
         </figure>
     </footer>
+    
+    </body>
 </html>

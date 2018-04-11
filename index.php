@@ -1,7 +1,12 @@
 <?php
     session_start();
+    
     if(!isset($_SESSION['cart'])){
         $_SESSION['cart'] = array();
+    }
+    
+    if(isset($_GET['addButton'])){
+        array_push($_SESSION['cart'],$_GET['addButton']);
     }
     
     include 'dbConnection.php';
@@ -63,9 +68,9 @@
             
             $sql = "SELECT * FROM PRICE NATURAL JOIN GENRE NATURAL JOIN PLATFORM WHERE 1";
             
-            if (!empty($_GET['product'])) { //checks whether user has typed something in the "Product" text box
+            if (!empty($_GET['gameTitle'])) { //checks whether user has typed something in the "Product" text box
                  $sql .=  " AND Title LIKE :Title";
-                 $namedParameters[":Title"] = "%" . $_GET['product'] . "%";
+                 $namedParameters[":Title"] = "%" . $_GET['gameTitle'] . "%";
             }
                   
                   
@@ -93,25 +98,46 @@
                 
                 if($_GET['orderBy'] == "price") {
                     $sql .= " ORDER BY Price";
-                } else {
+                }   
+                else {
                       $sql .= " ORDER BY Title";
                  }
-                
-                
             }
+           
+           
             //echo $sql; //for debugging purposes
             
              $stmt = $conn->prepare($sql);
              $stmt->execute($namedParameters);
              $records = $stmt->fetchAll(PDO::FETCH_ASSOC);
         
-
+            echo "<table>";
             foreach ($records as $record) {
-                echo "<img src='" . $record['Image'] . "' width = '200' />";
+                $gameID = $record["ID"];
+                $gameTitle = $record["Title"];
+                $gameGenre = $record["Genre"];
+                $gamePlatform = $record['Platform'];
+                $gamePrice = $record["Price"];
                 
-                echo  $record["Title"] . " || " . $record["Genre"] . " || ".$record['Platform']." || $". $record["Price"] ."<br /> <br>";
+                print_r($record);
+                
+                echo '<tr>';
+                //echo "<td><img src='$itemImage'><</td>";
+                //echo "<td><a href=gameInfo.php?gameID=".$gameID."'>More Info</a></td>";
+                echo "<td><h4>$gameTitle</h4></td>";
+                echo "<td><h4>$gameGenre</h4></td>";
+                echo "<td><h4>$gamePlatform</h4></td>";
+                echo "<td><h4>$$gamePrice</h4></td>";
+                
+                //Hidden input elements
+                
+                echo '<form method="POST">';
+                echo "<input type='hidden' name='gameTitle' value='$gameTitle'>";
+                echo "<td><button name='addButton' value='$gameTitle'>Add</button></td>";
+                echo "</form>";
+                echo "</tr>";
             }
-            
+            echo "</table>";
         }
         
     }
@@ -121,16 +147,34 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title> Game Search </title>
-        <link href ="css/styles.css" rel ="stylesheet" type="text/css" />
+        <title> OtterMart Product Search </title>
+        <link href ="css/style.css" rel ="stylesheet" type="text/css" />
     </head>
-    <body>
+    <body> 
+    <div class='container'>
+        <div class='text-center'>
+       <!-- Bootstrap Navagation Bar -->
+            <nav class='navbar navbar-default - navbar-fixed-top'>
+                <div class='container-fluid'>
+                    <div class='navbar-header'>
+                        <a class='navbar-brand' href='#'>Gamestore</a>
+                    </div>
+                    <ul class='nav navbar-nav'>
+                        <li><a href='index.php'>Home</a></li>
+                        <li><a href='cart.php'>
+                        <span class='glyphicon glyphicon-shopping-cart' aria-hidden='true'>
+                        </span> Cart:</a></li>
+                    </ul>
+                </div>
+            </nav>
+            <br> <br> <br>
+
 
         <h1>  Gamestore </h1>
         
         <form>
             
-            Product: <input type="text" name="product" /><br /><br />
+            Product: <input type="text" name="gameTitle" /><br /><br />
             
             Genre: 
                 <select name="genre">
@@ -167,8 +211,9 @@
         
         <br />
         <hr>
-        
+        <form>
         <?= displaySearchResults() ?>
+        </form>
 
     </body>
 </html>
