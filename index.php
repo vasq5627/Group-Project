@@ -10,7 +10,7 @@
     function displayGenre(){
         global $conn;
         
-        $sql = "SELECT ID, Genre FROM `GENRE` ORDER BY Genre";
+        $sql = "SELECT DISTINCT Genre FROM `GENRE` ORDER BY Genre";
         
         $stmt = $conn->prepare($sql);
         $stmt->execute();
@@ -29,7 +29,7 @@
     function displayPlatform(){
         global $conn;
         
-        $sql = "SELECT ID, Platform FROM `PLATFORM` ORDER BY Platform";
+        $sql = "SELECT DISTINCT  Platform FROM `PLATFORM` ORDER BY Platform";
         
         $stmt = $conn->prepare($sql);
         $stmt->execute();
@@ -99,8 +99,7 @@
         
             foreach ($records as $record) {
             
-                 echo "<a href =\"purchaseHistory.php?ID=" .$record["ID"]. "\"> </a>";
-                 echo  $record["Title"] . " " . $record["Genre"] . " $". $record["Price"] ."<br /> <br>";
+                echo  $record["Title"] . " " . $record["Genre"] . " $". $record["Price"] ."<br /> <br>";
             
             }
         }
