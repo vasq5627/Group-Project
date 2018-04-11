@@ -122,7 +122,25 @@
         <title> OtterMart Product Search </title>
         <link href ="css/style.css" rel ="stylesheet" type="text/css" />
     </head>
-    <body>
+    <body> 
+    <div class='container'>
+        <div class='text-center'>
+       <!-- Bootstrap Navagation Bar -->
+            <nav class='navbar navbar-default - navbar-fixed-top'>
+                <div class='container-fluid'>
+                    <div class='navbar-header'>
+                        <a class='navbar-brand' href='#'>Gamestore</a>
+                    </div>
+                    <ul class='nav navbar-nav'>
+                        <li><a href='index.php'>Home</a></li>
+                        <li><a href='scart.php'>
+                        <span class='glyphicon glyphicon-shopping-cart' aria-hidden='true'>
+                        </span> Cart:</a></li>
+                    </ul>
+                </div>
+            </nav>
+            <br> <br> <br>
+
 
         <h1>  Gamestore </h1>
         
