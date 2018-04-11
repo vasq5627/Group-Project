@@ -14,7 +14,10 @@
         }
     }
     
-
+ if(isset($_GET['reset'])){
+  session_destroy();
+    header("Location:index.php");
+ }
 
 ?>
 
@@ -32,6 +35,9 @@
             <h1> Your Shopping Cart</h1><br>
             <!--Cart Items-->
             <?=displayCart()?>
+        <form>
+            <input type="submit" value="empty" name="reset"/>
+        </form>
     <footer>
         <hr>
         CST336 Internet Programming. 2018 &copy <br />
