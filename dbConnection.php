@@ -5,7 +5,7 @@ function getDatabaseConnection($dbName) {
 $host = "localhost";
 $dbname = $dbName;
 $username = "root";
-$password = "";
+$password = "secret";
 
 //checks whether the URL contains "herokuapp" (using Heroku)
 if(strpos($_SERVER['HTTP_HOST'], 'herokuapp') !== false) {

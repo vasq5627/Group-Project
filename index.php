@@ -1,18 +1,10 @@
 <?php
     session_start();
-    
-    
     if(!isset($_SESSION['cart'])){
         $_SESSION['cart'] = array();
     }
     
-    if(isset($_POST['gameTitle'])){
-       array_push($_SESSION['cart'],$_POST['gameTitle']);
-    }
-    
     include 'dbConnection.php';
-    
-    
     
     $conn = getDatabaseConnection("Gamestore");
     
@@ -71,9 +63,9 @@
             
             $sql = "SELECT * FROM PRICE NATURAL JOIN GENRE NATURAL JOIN PLATFORM WHERE 1";
             
-            if (!empty($_GET['gameTitle'])) { //checks whether user has typed something in the "Product" text box
+            if (!empty($_GET['product'])) { //checks whether user has typed something in the "Product" text box
                  $sql .=  " AND Title LIKE :Title";
-                 $namedParameters[":Title"] = "%" . $_GET['gameTitle'] . "%";
+                 $namedParameters[":Title"] = "%" . $_GET['product'] . "%";
             }
                   
                   
@@ -101,88 +93,42 @@
                 
                 if($_GET['orderBy'] == "price") {
                     $sql .= " ORDER BY Price";
-                }   
-                else {
-                      $sql .= " ORDER BY Title";
-                 }
+                }
+                
+                
             }
-           
-           
             //echo $sql; //for debugging purposes
             
              $stmt = $conn->prepare($sql);
              $stmt->execute($namedParameters);
              $records = $stmt->fetchAll(PDO::FETCH_ASSOC);
         
-            echo "<table>";
+
             foreach ($records as $record) {
-<<<<<<< HEAD
-                $gameID = $record["ID"];
-                $gameTitle = $record["Title"];
-                $gameGenre = $record["Genre"];
-                $gamePlatform = $record['Platform'];
-                $gamePrice = $record["Price"];
+                echo "<img src='" . $record['Image'] . "' width = '200' />";
                 
-                echo '<tr>';
-                //echo "<td><img src='$itemImage'><</td>";
-                echo "<td><a href=gameInfo.php?gameID=".$gameID."'>More Info</a></td>";
-                echo "<td><h4>$gameTitle</h4></td>";
-                echo "<td><h4>$gameGenre</h4></td>";
-                echo "<td><h4>$gamePlatform</h4></td>";
-                echo "<td><h4>$$gamePrice</h4></td>";
-                
-                //Hidden input elements
-                
-                echo '<form method="POST">';
-                echo "<input type='hidden' name='gameTitle' value='$gameTitle'>";
-                echo "<td><input type='submit' value='ADD'>";
-                echo "</form>";
-                echo "</tr>";
-=======
-                 echo "<a href=\"Purchase.php?ID=".$record["ID"]. "\"> History </a>";
-                echo  $record["Title"] . " " . $record["Genre"] . " ".$record['Platform']." $". $record["Price"] ."<br /> <br>";
->>>>>>> 650a70053b99f937f2b4820ff93101cf3e3d6f47
+                echo  $record["Title"] . " || " . $record["Genre"] . " || ".$record['Platform']." || $". $record["Price"] ."<br /> <br>";
             }
-            echo "</table>";
+            
         }
         
     }
-    
-    var_dump($_SESSION);
     
 ?>
 
 <!DOCTYPE html>
 <html>
     <head>
-        <title> OtterMart Product Search </title>
-        <link href ="css/style.css" rel ="stylesheet" type="text/css" />
+        <title> Game Search </title>
+        <link href ="css/styles.css" rel ="stylesheet" type="text/css" />
     </head>
-    <body> 
-    <div class='container'>
-        <div class='text-center'>
-       <!-- Bootstrap Navagation Bar -->
-            <nav class='navbar navbar-default - navbar-fixed-top'>
-                <div class='container-fluid'>
-                    <div class='navbar-header'>
-                        <a class='navbar-brand' href='#'>Gamestore</a>
-                    </div>
-                    <ul class='nav navbar-nav'>
-                        <li><a href='index.php'>Home</a></li>
-                        <li><a href='cart.php'>
-                        <span class='glyphicon glyphicon-shopping-cart' aria-hidden='true'>
-                        </span> Cart:</a></li>
-                    </ul>
-                </div>
-            </nav>
-            <br> <br> <br>
-
+    <body>
 
         <h1>  Gamestore </h1>
         
         <form>
             
-            Product: <input type="text" name="gameTitle" /><br /><br />
+            Product: <input type="text" name="product" /><br /><br />
             
             Genre: 
                 <select name="genre">
@@ -219,9 +165,8 @@
         
         <br />
         <hr>
-        <form>
+        
         <?= displaySearchResults() ?>
-        </form>
 
     </body>
 </html>
