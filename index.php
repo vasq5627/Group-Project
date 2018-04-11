@@ -107,6 +107,7 @@
              $records = $stmt->fetchAll(PDO::FETCH_ASSOC);
         
             foreach ($records as $record) {
+                 echo "<a href=\"Purchase.php?ID=".$record["ID"]. "\"> History </a>";
                 echo  $record["Title"] . " " . $record["Genre"] . " ".$record['Platform']." $". $record["Price"] ."<br /> <br>";
             }
             
