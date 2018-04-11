@@ -118,11 +118,12 @@
                 $gameGenre = $record["Genre"];
                 $gamePlatform = $record['Platform'];
                 $gamePrice = $record["Price"];
+                $gameImage = $record["Image"];
                 
         
                 
                 echo '<tr>';
-                //echo "<td><img src='$itemImage'><</td>";
+                echo "<td><img src='$gameImage' width='200'><</td>";
                 //echo "<td><a href=gameInfo.php?gameID=".$gameID."'>More Info</a></td>";
                 echo "<td><h4>$gameTitle</h4></td>";
                 echo "<td><h4>$gameGenre</h4></td>";
