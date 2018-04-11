@@ -4,7 +4,7 @@
         $_SESSION['cart'] = array();
     }
     
-    include 'dbConnection.php';
+    include 'dbConn.php';
     
     $conn = getDatabaseConnection("Gamestore");
     
@@ -93,17 +93,19 @@
                 
                 if($_GET['orderBy'] == "price") {
                     $sql .= " ORDER BY Price";
-                }
-                
-                
+                }   
+                else {
+                      $sql .= " ORDER BY Title";
+                 }
             }
+           
+           
             //echo $sql; //for debugging purposes
             
              $stmt = $conn->prepare($sql);
              $stmt->execute($namedParameters);
              $records = $stmt->fetchAll(PDO::FETCH_ASSOC);
         
-
             foreach ($records as $record) {
                 echo  $record["Title"] . " " . $record["Genre"] . " ".$record['Platform']." $". $record["Price"] ."<br /> <br>";
             }
@@ -118,7 +120,7 @@
 <html>
     <head>
         <title> OtterMart Product Search </title>
-        <link href ="css/styles.css" rel ="stylesheet" type="text/css" />
+        <link href ="css/style.css" rel ="stylesheet" type="text/css" />
     </head>
     <body>
 
@@ -163,8 +165,9 @@
         
         <br />
         <hr>
-        
+        <form>
         <?= displaySearchResults() ?>
+        </form>
 
     </body>
 </html>
