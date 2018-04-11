@@ -1,11 +1,17 @@
 <?php
+    session_start();
+    if(!isset($_SESSION['cart'])){
+        $_SESSION['cart'] = array();
+    }
+    
     include 'dbConnection.php';
-    include 'functions.php';
+    
     $conn = getDatabaseConnection("Gamestore");
+    
     function displayGenre(){
         global $conn;
         
-        $sql = "SELECT ID, Genre FROM `GENRE` ORDER BY Genre";
+        $sql = "SELECT DISTINCT Genre FROM `GENRE` ORDER BY Genre";
         
         $stmt = $conn->prepare($sql);
         $stmt->execute();
@@ -15,7 +21,7 @@
         
         foreach ($records as $record) {
             
-            echo "<option value='".$record["ID"]."' >" . $record["Genre"] . "</option>";
+            echo "<option value='".$record["Genre"]."' >" . $record["Genre"] . "</option>";
             
         }
         
@@ -24,7 +30,7 @@
     function displayPlatform(){
         global $conn;
         
-        $sql = "SELECT DISTINCT Platform FROM `PLATFORM` ORDER BY Platform";
+        $sql = "SELECT DISTINCT  Platform FROM `PLATFORM` ORDER BY Platform";
         
         $stmt = $conn->prepare($sql);
         $stmt->execute();
@@ -34,7 +40,7 @@
         
         foreach ($records as $record) {
             
-            echo "<option value='".$record["ID"]."' >" . $record["Platform"] . "</option>";
+            echo "<option value='".$record["Platform"]."' >" . $record["Platform"] . "</option>";
             
         }
         
@@ -55,7 +61,7 @@
             
             $namedParameters = array();
             
-            $sql = "SELECT * FROM PRICE NATURAL JOIN GENRE WHERE 1";
+            $sql = "SELECT * FROM PRICE NATURAL JOIN GENRE NATURAL JOIN PLATFORM WHERE 1";
             
             if (!empty($_GET['product'])) { //checks whether user has typed something in the "Product" text box
                  $sql .=  " AND Title LIKE :Title";
@@ -63,10 +69,15 @@
             }
                   
                   
-               if (!empty($_GET['category'])) { //checks whether user has typed something in the "Product" text box
-                 $sql .=  " AND Genre = :Genre";
-                 $namedParameters[":Genre"] =  $_GET['category'];
-             }   
+             if (!empty($_GET['genre'])) { //checks whether user has typed something in the "Product" text box
+                 $sql .=  " AND Genre = :genre";
+                 $namedParameters[":genre"] =  $_GET['genre'];
+             }
+             
+             if (!empty($_GET['platform'])) { //checks whether user has typed something in the "Product" text box
+                 $sql .=  " AND Platform = :platform";
+                 $namedParameters[":platform"] =  $_GET['platform'];
+             }
             
              if (!empty($_GET['priceFrom'])) { //checks whether user has typed something in the "Product" text box
                  $sql .=  " AND price >= :priceFrom";
@@ -92,12 +103,11 @@
              $stmt->execute($namedParameters);
              $records = $stmt->fetchAll(PDO::FETCH_ASSOC);
         
+
             foreach ($records as $record) {
-            
-                 echo "<a href =\"purchaseHistory.php?ID=" .$record["ID"]. "\"> </a>";
-                 echo  $record["Title"] . " " . $record["Genre"] . " $". $record["Platform"] ." " . $record["Price"] . "<br /> <br>";
-            
+                echo  $record["Title"] . " " . $record["Genre"] . " ".$record['Platform']." $". $record["Price"] ."<br /> <br>";
             }
+            
         }
         
     }
@@ -107,33 +117,11 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title> Gamestore Product Search </title>
+        <title> OtterMart Product Search </title>
         <link href ="css/styles.css" rel ="stylesheet" type="text/css" />
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-        
     </head>
     <body>
-        <div class='container'>
-        <div class='text-center'>
-       <!-- Bootstrap Navagation Bar -->
-            <nav class='navbar navbar-default - navbar-fixed-top'>
-                <div class='container-fluid'>
-                    <div class='navbar-header'>
-                        <a class='navbar-brand' href='#'>Gamestore</a>
-                    </div>
-                    <ul class='nav navbar-nav'>
-                        <li><a href='index.php'>Home</a></li>
-                        <li><a href='scart.php'>
-                        <span class='glyphicon glyphicon-shopping-cart' aria-hidden='true'>
-                        </span> Cart:<?php displayCartCount(); ?></a></li>
-                    </ul>
-                </div>
-            </nav>
-            <br> <br> <br>
+
         <h1>  Gamestore </h1>
         
         <form>
@@ -141,7 +129,7 @@
             Product: <input type="text" name="product" /><br /><br />
             
             Genre: 
-                <select name="category">
+                <select name="genre">
                     <option value=""> Select One </option>
                     <?=displayGenre()?>
                 </select>
@@ -177,7 +165,6 @@
         <hr>
         
         <?= displaySearchResults() ?>
-    </div>
-    </div>
+
     </body>
 </html>
