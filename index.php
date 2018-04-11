@@ -93,7 +93,9 @@
                 
                 if($_GET['orderBy'] == "price") {
                     $sql .= " ORDER BY Price";
-                }
+                } else {
+                      $sql .= " ORDER BY Title";
+                 }
                 
                 
             }
