@@ -119,7 +119,7 @@
                 $gamePlatform = $record['Platform'];
                 $gamePrice = $record["Price"];
                 
-                print_r($record);
+        
                 
                 echo '<tr>';
                 //echo "<td><img src='$itemImage'><</td>";
