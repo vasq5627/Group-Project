@@ -7,6 +7,7 @@
     include 'dbConnection.php';
     
     $conn = getDatabaseConnection("Gamestore");
+    
     function displayGenre(){
         global $conn;
         
@@ -20,7 +21,7 @@
         
         foreach ($records as $record) {
             
-            echo "<option value='".$record["ID"]."' >" . $record["Genre"] . "</option>";
+            echo "<option value='".$record["Genre"]."' >" . $record["Genre"] . "</option>";
             
         }
         
@@ -68,9 +69,9 @@
             }
                   
                   
-             if (!empty($_GET['category'])) { //checks whether user has typed something in the "Product" text box
-                 $sql .=  " AND ID = :categoryId";
-                 $namedParameters[":categoryId"] =  $_GET['category'];
+             if (!empty($_GET['genre'])) { //checks whether user has typed something in the "Product" text box
+                 $sql .=  " AND Genre = :genre";
+                 $namedParameters[":genre"] =  $_GET['genre'];
              }
              
              if (!empty($_GET['platform'])) { //checks whether user has typed something in the "Product" text box
@@ -135,7 +136,7 @@
             Product: <input type="text" name="product" /><br /><br />
             
             Genre: 
-                <select name="category">
+                <select name="genre">
                     <option value=""> Select One </option>
                     <?=displayGenre()?>
                 </select>
