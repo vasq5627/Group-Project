@@ -2,7 +2,7 @@
     include 'dbConnection.php';
     
     $conn = getDatabaseConnection("Gamestore");
-    function displayCategories(){
+    function displayGenre(){
         global $conn;
         
         $sql = "SELECT ID, Genre FROM `GENRE` ORDER BY Genre";
@@ -16,6 +16,25 @@
         foreach ($records as $record) {
             
             echo "<option value='".$record["ID"]."' >" . $record["Genre"] . "</option>";
+            
+        }
+        
+    }
+    
+    function displayPlatform(){
+        global $conn;
+        
+        $sql = "SELECT ID, Platform FROM `PLATFORM` ORDER BY Platform";
+        
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        $records = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        //print_r($records);
+        
+        foreach ($records as $record) {
+            
+            echo "<option value='".$record["ID"]."' >" . $record["Platform"] . "</option>";
             
         }
         
@@ -93,30 +112,41 @@
     </head>
     <body>
 
-        <h1>  OtterMart Product Search </h1>
+        <h1>  Gamestore </h1>
         
         <form>
             
-            Product: <input type="text" name="product" /><br />
+            Product: <input type="text" name="product" /><br /><br />
             
-            Category: 
+            Genre: 
                 <select name="category">
                     <option value=""> Select One </option>
-                    <?=displayCategories()?>
+                    <?=displayGenre()?>
                 </select>
-            <br />
+            <br /><br />
+            
+            Platform: 
+                <select name="platform">
+                    <option value=""> Select One </option>
+                    <?=displayPlatform()?>
+                </select>
+            <br /><br />
             
             Price:  From <input type="text" name="priceFrom" size="7"/>
                     To   <input type="text" name="priceTo" size="7"/>
                     
-            <br />
+            <br /><br />
             
              Order result by:<br />
              
-             <input type="radio" name="orderBy" value="price"/> Price <br />
+             <input type="radio" name="orderBy" value="price"/> Price 
+             
+             <br /><br />
+             
              <input type="radio" name="orderBy" value="name"/> Name
              
-             <br />
+             <br /><br />
+             
              <input type="submit" value="Search" name="searchForm" />
              
         </form>
