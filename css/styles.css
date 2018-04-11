@@ -1,9 +1,95 @@
-h1 {
+ body {
+    color:black;
+    background-color:black;
+    text-align:center;
+  background-image:url(../img/google.png);
+}
+#cart {
+    float:right;
+}
+h4{
+    font-family: "Comic Sans MS", cursive, sans-serif;
+}
+#title {
+    width: 300px;
+    background-color:DodgerBlue;
+    opacity: .8;
+    color: #000000;
     text-align: center;
+    height:50;
+    border-radius: 15px;
+    margin: auto;
+    top: 60px;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+}
+h2,h3{
+    font-family:"Arial Black", Gadget, sans-serif;
 }
 
-form {
-    font-weight:bold;
-    text-align:center;
-    border: 1px;
+input[type=text] {
+    width: 150px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 20px;
+    font-size: 18px;
+    background-color: white;
+    background-position: 10px 10px; 
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 2px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+input[type=text]:focus {
+    width: 40%;
+}
+ input[type=submit], input[type=reset]:hover {
+    background-color:  #ffa64d;
+    border: none;
+    color: black;
+    padding: 16px 32px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 15px;
+    text-decoration: underline;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    font-size: 1.0em;
+    border-bottom: 2px white;
+    transition: .9s;
+    
+    
+}
+
+
+ form {
+    width: 600px;
+    background-color: white;
+    opacity: .99;
+    color: black;
+    text-align: center;
+    height:150;
+    padding:30px; 
+    border-radius: 30px;
+    margin: auto;
+    top: 100px;
+     border-style: solid;
+    border-color:  #3366ff;
+}
+
+#game{
+    float :left;
+}
+select {
+    width: 50%;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 8px;
+    background-color: #f1f1f1;
+}
+#robot{
+    float:right;
+}
+#controller{
+    float:left;
+    
 }
