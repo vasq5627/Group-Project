@@ -39,7 +39,7 @@
         
         foreach ($records as $record) {
             
-            echo "<option value='".$record["ID"]."' >" . $record["Platform"] . "</option>";
+            echo "<option value='".$record["Platform"]."' >" . $record["Platform"] . "</option>";
             
         }
         
@@ -60,7 +60,7 @@
             
             $namedParameters = array();
             
-            $sql = "SELECT * FROM PRICE NATURAL JOIN GENRE WHERE 1";
+            $sql = "SELECT * FROM PRICE NATURAL JOIN GENRE NATURAL JOIN PLATFORM WHERE 1";
             
             if (!empty($_GET['product'])) { //checks whether user has typed something in the "Product" text box
                  $sql .=  " AND Title LIKE :Title";
@@ -71,7 +71,12 @@
              if (!empty($_GET['category'])) { //checks whether user has typed something in the "Product" text box
                  $sql .=  " AND ID = :categoryId";
                  $namedParameters[":categoryId"] =  $_GET['category'];
-             }    
+             }
+             
+             if (!empty($_GET['platform'])) { //checks whether user has typed something in the "Product" text box
+                 $sql .=  " AND Platform = :platform";
+                 $namedParameters[":platform"] =  $_GET['platform'];
+             }
             
              if (!empty($_GET['priceFrom'])) { //checks whether user has typed something in the "Product" text box
                  $sql .=  " AND price >= :priceFrom";
@@ -97,11 +102,18 @@
              $stmt->execute($namedParameters);
              $records = $stmt->fetchAll(PDO::FETCH_ASSOC);
         
+            echo "<table>";
+            echo "<tr>";
+            echo "<td> Title </td>";
+            echo "<td> Genre </td>";
+            echo "<td> Platfrom </td>";
+            echo "<td> Price </td>";
+            
             foreach ($records as $record) {
-            
-                echo  $record["Title"] . " " . $record["Genre"] . " $". $record["Price"] ."<br /> <br>";
-            
+                echo  $record["Title"] . " " . $record["Genre"] . " ".$record['Platform']." $". $record["Price"] ."<br /> <br>";
             }
+            
+            echo "</table>";
         }
         
     }
