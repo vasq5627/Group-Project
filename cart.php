@@ -37,8 +37,7 @@
         <form>
             
             <?=displayCart()?>
-        </form>
-            <form>
+        
             <input type="submit" value="empty" name="reset"/>
         </form>
     <footer>
