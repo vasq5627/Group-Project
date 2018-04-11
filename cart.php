@@ -26,7 +26,7 @@
     <head>
         <title> Cart</title>
          <style>
-   @import url(css/style.css);
+   @import url(css/styles.css);
         </style>
     </head>
     <body>
