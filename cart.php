@@ -38,9 +38,9 @@
             
             <?=displayCart()?>
         </form>
-        <form>
+   
             <input type="submit" value="empty" name="reset"/>
-        </form>
+ 
     <footer>
         <hr>
         CST336 Internet Programming. 2018 &copy <br />
