@@ -148,7 +148,7 @@
 <html>
     <head>
         <title> OtterMart Product Search </title>
-        <link href ="css/style.css" rel ="stylesheet" type="text/css" />
+        <link href ="css/styles.css" rel ="stylesheet" type="text/css" />
     </head>
     <body> 
     <div class='container'>
