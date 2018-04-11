@@ -116,6 +116,7 @@
         
             echo "<table>";
             foreach ($records as $record) {
+<<<<<<< HEAD
                 $gameID = $record["ID"];
                 $gameTitle = $record["Title"];
                 $gameGenre = $record["Genre"];
@@ -137,6 +138,10 @@
                 echo "<td><input type='submit' value='ADD'>";
                 echo "</form>";
                 echo "</tr>";
+=======
+                 echo "<a href=\"Purchase.php?ID=".$record["ID"]. "\"> History </a>";
+                echo  $record["Title"] . " " . $record["Genre"] . " ".$record['Platform']." $". $record["Price"] ."<br /> <br>";
+>>>>>>> 650a70053b99f937f2b4820ff93101cf3e3d6f47
             }
             echo "</table>";
         }
