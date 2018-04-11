@@ -34,7 +34,10 @@
 
             <h1> Your Shopping Cart</h1><br>
             <!--Cart Items-->
+        <form>
+            
             <?=displayCart()?>
+        </form>
         <form>
             <input type="submit" value="empty" name="reset"/>
         </form>
